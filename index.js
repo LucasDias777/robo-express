@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 3000;
+const PORT = 3000;
+const HOST = '0.0.0.0';
 
 
 
@@ -9,8 +10,8 @@ const port = 3000;
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json()); 
 
-app.post('/message', (req, res) => {
-  const userMessage = req.body.message;
+app.get('/message', (req, res) => {
+  const userMessage = req.query.message;
 
   // Simples lógica de resposta
   let botResponse = 'Desculpe, não entendi.';
@@ -30,6 +31,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+app.listen(PORT, HOST, () => {
+  console.log(`Servidor rodando em http://${HOST}:${PORT}`);
 });
